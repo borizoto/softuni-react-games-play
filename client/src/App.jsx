@@ -1,3 +1,5 @@
+import { Routes, Route } from "react-router"
+
 import GamesCatalog from "./components/games-catalog/GamesCatalog"
 import GamesCreate from "./components/games-create/GamesCreate"
 import GamesDetails from "./components/games-details/GamesDetails"
@@ -15,27 +17,28 @@ function App() {
 
 			{/* Main Content */}
 			<main id="main-content">
-				{/* Home Page */}
-				<Home />
+				<Routes>
+					{/* Home Page */}
+					<Route path="/" element={<Home />} />
 
-				{/* Login Page ( Only for Guest users ) */}
-				<Login />
+					{/* Login Page ( Only for Guest users ) */}
+					<Route path="/login" element={<Login />} />
 
-				{/* Register Page ( Only for Guest users ) */}
-				<Register />
+					{/* Register Page ( Only for Guest users ) */}
+					<Route path="/register" element={<Register />} />
 
-				{/* Create Page ( Only for logged-in users ) */}
-				<GamesCreate />
+					{/* Create Page ( Only for logged-in users ) */}
+					<Route path="/games/create" element={<GamesCreate />} />
 
-				{/* Edit Page ( Only for the creator )*/}
-				<GamesEdit />
+					{/* Edit Page ( Only for the creator )*/}
+					<Route path="/#" element={<GamesEdit />} />
 
-				{/*Details Page*/}
-				<GamesDetails />	
+					{/*Details Page*/}
+					<Route path="/#" element={<GamesDetails />} />
 
-				{/* Catalogue */}
-				<GamesCatalog />
-
+					{/* Catalogue */}
+					<Route path="/games" element={<GamesCatalog />} />
+				</Routes>
 			</main>
 		</div>
 
