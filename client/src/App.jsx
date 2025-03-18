@@ -31,10 +31,10 @@ function App() {
 					<Route path="/games/create" element={<GamesCreate />} />
 
 					{/* Edit Page ( Only for the creator )*/}
-					<Route path="/#" element={<GamesEdit />} />
+					<Route path="/games/:gameId/edit" element={<GamesEdit />} />
 
 					{/*Details Page*/}
-					<Route path="/#" element={<GamesDetails />} />
+					<Route path="/games/:gameId/details" element={<GamesDetails />} />
 
 					{/* Catalogue */}
 					<Route path="/games" element={<GamesCatalog />} />
