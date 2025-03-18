@@ -1,22 +1,30 @@
 import { useNavigate } from 'react-router'
+import { useState } from 'react';
 
 import { create } from "../../services/gameService";
 
 export default function GamesCreate() {
     const navigate = useNavigate();
+    const [error, setError] = useState(null);
+
     const createGameAction = async (formData) => {
         const gameData = Object.fromEntries(formData);
-        
-        await create(gameData);
 
-        navigate('/games');
-    }
+        try {
+            await create(gameData);
+            navigate('/games');
+        } catch (err) {
+            console.error("Error creating game:", err.message);
+            setError(err.message || "Failed to create game. Please try again.");
+        }
+    };
 
     return (
         <section id="create-page" className="auth">
             <form id="create" action={createGameAction}>
                 <div className="container">
                     <h1>Create Game</h1>
+
                     <label htmlFor="leg-title">Legendary title:</label>
                     <input
                         type="text"
@@ -52,8 +60,10 @@ export default function GamesCreate() {
                         className="btn submit"
                         type="submit"
                         defaultValue="Create Game"
-                    />
+                    />                    
                 </div>
+                    {/* Display error message if there is an error */}
+                    {error && <p className="error">{error}</p>}
             </form>
         </section>
     );
