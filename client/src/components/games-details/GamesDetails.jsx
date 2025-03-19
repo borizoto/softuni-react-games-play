@@ -19,7 +19,7 @@ export default function GamesDetails({
         getOne(gameId)
         .then(setGame)
 
-        getAll()
+        getAll(gameId)
             .then(setComments)
     }, [])
 
