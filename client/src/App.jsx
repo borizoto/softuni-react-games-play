@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router"
+import { useState } from "react"
 
 import GamesCatalog from "./components/games-catalog/GamesCatalog"
 import GamesCreate from "./components/games-create/GamesCreate"
@@ -10,6 +11,8 @@ import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 
 function App() {
+	const [email, setEmail] = useState('');
+	
 	return (
 		<div id="box">
 			{/* Header */}
@@ -22,7 +25,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 
 					{/* Login Page ( Only for Guest users ) */}
-					<Route path="/login" element={<Login />} />
+					<Route path="/login" element={<Login setEmail={setEmail} />} />
 
 					{/* Register Page ( Only for Guest users ) */}
 					<Route path="/register" element={<Register />} />

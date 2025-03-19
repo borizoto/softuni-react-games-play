@@ -8,13 +8,13 @@ export default function GamesDetails() {
     const navigate = useNavigate();
 
     const [game, setGame] = useState({})
-    useEffect(() => {
+    useEffect(() => {w
         getOne(gameId)
         .then(setGame)
     }, [])
 
     const deleteClickHandler = async () => {
-        const isConfirmed = confirm(`Are you sure you want to delete ${game.title} game?`);
+        const isConfirmed = confirm(`Are you sure you want to delete "${game.title}" game?`);
 
         if (!isConfirmed) {
             return;
