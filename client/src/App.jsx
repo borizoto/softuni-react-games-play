@@ -9,6 +9,7 @@ import Header from "./components/header/Header"
 import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
+import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
 	const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ function App() {
 
 			{/* Main Content */}
 			<main id="main-content">
+				<ScrollToTop />
 				<Routes>
 					{/* Home Page */}
 					<Route path="/" element={<Home />} />
