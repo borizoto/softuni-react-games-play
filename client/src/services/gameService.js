@@ -8,4 +8,6 @@ export const getAll = async () => {
     return games;
 };
 
+export const getOne = (gameId) => request('GET', `${BASE_URL}/${gameId}`);
+
 export const create = (gameData) => request('POST', BASE_URL, gameData);
