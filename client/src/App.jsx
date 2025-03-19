@@ -12,7 +12,7 @@ import Register from "./components/register/Register"
 
 function App() {
 	const [email, setEmail] = useState('');
-	
+
 	return (
 		<div id="box">
 			{/* Header */}
@@ -37,7 +37,7 @@ function App() {
 					<Route path="/games/:gameId/edit" element={<GamesEdit />} />
 
 					{/*Details Page*/}
-					<Route path="/games/:gameId/details" element={<GamesDetails />} />
+					<Route path="/games/:gameId/details" element={<GamesDetails email={email} />} />
 
 					{/* Catalogue */}
 					<Route path="/games" element={<GamesCatalog />} />

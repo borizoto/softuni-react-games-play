@@ -2,15 +2,25 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router'
 
 import { deleteGame, getOne } from '../../services/gameService';
+import CommentsDetails from '../comments-details/CommentsDetails';
+import CommentsCreate from '../comments-create/CommentsCreate';
+import { getAll } from '../../services/commentService';
 
-export default function GamesDetails() {
+export default function GamesDetails({
+    email
+}) {
     const { gameId } = useParams();
     const navigate = useNavigate();
 
     const [game, setGame] = useState({})
-    useEffect(() => {w
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
         getOne(gameId)
         .then(setGame)
+
+        getAll()
+            .then(setComments)
     }, [])
 
     const deleteClickHandler = async () => {
@@ -39,20 +49,7 @@ export default function GamesDetails() {
                 <p className="text">{game.summary}</p>
 
                 {/* Bonus ( for Guests and Users ) */}
-                <div className="details-comments">
-                    <h2>Comments:</h2>
-                    <ul>
-                        {/* list all comments for current game (If any) */}
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    {/* Display paragraph: If there are no games in the database */}
-                    <p className="no-comment">No comments.</p>
-                </div>
+                <CommentsDetails comments={comments}/> 
 
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
                 <div className="buttons">
@@ -67,21 +64,7 @@ export default function GamesDetails() {
 
             {/* Bonus */}
             {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
-            <article className="create-comment">
-                <label>Add new comment:</label>
-                <form className="form">
-                    <textarea
-                        name="comment"
-                        placeholder="Comment......"
-                        defaultValue={""}
-                    />
-                    <input
-                        className="btn submit"
-                        type="submit"
-                        defaultValue="Add Comment"
-                    />
-                </form>
-            </article>
+            {email && <CommentsCreate email={email} setComments={setComments} />}
 
         </section>
     );
