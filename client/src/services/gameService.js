@@ -11,3 +11,5 @@ export const getAll = async () => {
 export const getOne = (gameId) => request('GET', `${BASE_URL}/${gameId}`);
 
 export const create = (gameData) => request('POST', BASE_URL, gameData);
+
+export const deleteGame = (gameId) => request('DELETE', `${BASE_URL}/${gameId}`);
