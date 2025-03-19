@@ -8,10 +8,9 @@ export default function GamesDetails() {
     const navigate = useNavigate();
 
     const [game, setGame] = useState({})
-
     useEffect(() => {
         getOne(gameId)
-            .then(setGame)
+        .then(setGame)
     }, [])
 
     const deleteClickHandler = async () => {
