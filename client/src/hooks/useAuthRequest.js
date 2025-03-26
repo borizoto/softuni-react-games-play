@@ -1,0 +1,13 @@
+import { useContext } from "react"
+import { UserContext } from "../contexts/UserContext"
+import request from "../utils/requester";
+
+export const useAuthRequest = () => {
+    const { accessToken } = useContext(UserContext);
+    
+    const authRequest = (method, url, data = null) => {
+        return request(method, url, data, accessToken)
+    };
+
+    return { authRequest };
+}

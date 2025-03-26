@@ -13,6 +13,7 @@ export default function Header() {
                 </Link>
             </h1>
             <nav>
+                {email}
                 <Link to="/games">All games</Link>
                 
                 {email

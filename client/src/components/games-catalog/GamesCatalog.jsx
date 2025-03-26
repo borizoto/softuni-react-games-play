@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { getAll } from "../../services/gameService";
 import GameCatalogItem from "./game-catalog-item/GameCatalogItem";
+import { useGames } from "../../api/gamesApi";
 
 export default function GamesCatalog() {
-    const [games, setGames] = useState([]);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        getAll()
-            .then(setGames)
-            .catch(err => {
-                console.error('Error fetching games:', err.message);
-                setError(err.message || "Failed to load games. Please try again later");
-            })
-    }, [])
+    
+    const { games, error } = useGames();
 
     return (
         <section id="catalog-page">

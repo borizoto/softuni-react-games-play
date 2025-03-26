@@ -1,23 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router'
 
-import { deleteGame, getOne } from '../../services/gameService';
 import CommentsDetails from '../comments-details/CommentsDetails';
 import CommentsCreate from '../comments-create/CommentsCreate';
 import { getAll } from '../../services/commentService';
 import { UserContext } from '../../contexts/UserContext';
+import { useDeleteGame, useGame } from '../../api/gamesApi';
 
 export default function GamesDetails() {
     const navigate = useNavigate();
     const { gameId } = useParams();
     const { email } = useContext(UserContext)
-    const [game, setGame] = useState({})
+    const { game } = useGame(gameId);
     const [comments, setComments] = useState([]);
+    const { deleteGame } = useDeleteGame();
 
     useEffect(() => {
-        getOne(gameId)
-            .then(setGame)
-
         getAll(gameId)
             .then(setComments)
     }, [])
