@@ -14,7 +14,7 @@ import ScrollToTop from "./components/ScrollToTop"
 function App() {
 	const [email, setEmail] = useState('');
 
-	return (
+	return ( 
 		<div id="box">
 			{/* Header */}
 			<Header />
