@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-
 import GameCatalogItem from "./game-catalog-item/GameCatalogItem";
 import { useGames } from "../../api/gamesApi";
 
 export default function GamesCatalog() {
-    
+
     const { games, error } = useGames();
 
     return (

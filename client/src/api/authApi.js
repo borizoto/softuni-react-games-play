@@ -26,7 +26,7 @@ export const useRegister = () => {
 
 export const useLogout = () => {
     const { accessToken, userLogoutHandler } = useContext(UserContext)
-
+    
     useEffect(() => {
         if (!accessToken) {
             return;
