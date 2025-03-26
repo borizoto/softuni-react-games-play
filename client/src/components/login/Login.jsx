@@ -1,17 +1,31 @@
+import { useActionState } from "react";
 import { Link, useNavigate } from "react-router";
+import { useLogin } from "../../api/authApi";
+import { useError } from "../../hooks/useError";
 
 export default function Login({
-    setEmail
+    setAuthData
 }) {
     const navigate = useNavigate();
+    const { login } = useLogin();
+    const { error, setError } = useError();
 
-    const loginAction = (formData) => {
-        const { email } = Object.fromEntries(formData);
+    const loginHandler = async (prevState, formData) => {
+        const { email, password } = Object.fromEntries(formData);
 
-        setEmail(email);
+        try {
+            const authData = await login(email, password);
 
-        navigate('/games');
+            setAuthData(authData);
+
+            navigate('/games');
+        } catch (err) {
+            console.error("Error logging in:", err.message);
+            setError(err.message || "Failed to log in profile. Please try again.");
+        }
     }
+
+    const [state, loginAction, isPending] = useActionState(loginHandler, { email: '', password: '' });
 
     return (
         <section id="login-page" className="auth">
@@ -28,7 +42,8 @@ export default function Login({
                     />
                     <label htmlFor="login-pass">Password:</label>
                     <input type="password" id="login-password" name="password" />
-                    <input type="submit" className="btn submit" defaultValue="Login" />
+                    <input type="submit" className="btn submit" defaultValue="Login" disabled={isPending} />
+                    {error && <p className="error">{error}</p>}
                     <p className="field">
                         <span>
                             If you don't have profile click <Link to="/register">here</Link>

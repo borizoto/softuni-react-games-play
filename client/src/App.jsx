@@ -12,7 +12,7 @@ import Register from "./components/register/Register"
 import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
-	const [email, setEmail] = useState('');
+	const [authData, setAuthData] = useState('');
 
 	return ( 
 		<div id="box">
@@ -27,7 +27,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 
 					{/* Login Page ( Only for Guest users ) */}
-					<Route path="/login" element={<Login setEmail={setEmail} />} />
+					<Route path="/login" element={<Login setAuthData={setAuthData} />} />
 
 					{/* Register Page ( Only for Guest users ) */}
 					<Route path="/register" element={<Register />} />
@@ -39,7 +39,7 @@ function App() {
 					<Route path="/games/:gameId/edit" element={<GamesEdit />} />
 
 					{/*Details Page*/}
-					<Route path="/games/:gameId/details" element={<GamesDetails email={email} />} />
+					<Route path="/games/:gameId/details" element={<GamesDetails email={authData.email} />} />
 
 					{/* Catalogue */}
 					<Route path="/games" element={<GamesCatalog />} />
