@@ -7,7 +7,7 @@ import { UserContext } from "../../contexts/UserContext";
 export default function Register() {
     const { setError, error } = useError();
     const { register } = useRegister();
-    const { setAuthData } = useContext(UserContext);
+    const { userLoginHandler } = useContext(UserContext);
     const navigate = useNavigate();
 
     const registerHandler = async (prevState, formData) => {
@@ -27,7 +27,7 @@ export default function Register() {
 
             delete authData.password;
 
-            setAuthData(authData);
+            userLoginHandler(authData);
 
             navigate('/games');
         } catch (err) {

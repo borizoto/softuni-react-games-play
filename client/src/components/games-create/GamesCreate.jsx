@@ -10,6 +10,10 @@ export default function GamesCreate() {
     const createGameAction = async (formData) => {
         const gameData = Object.fromEntries(formData);
 
+        if (!Object.values(gameData).every(value => !!value)) {
+            return setError('All fields must be filled!');
+        }
+
         try {
             await create(gameData);
             navigate('/games');
@@ -60,10 +64,10 @@ export default function GamesCreate() {
                         className="btn submit"
                         type="submit"
                         defaultValue="Create Game"
-                    />                    
+                    />
                 </div>
-                    {/* Display error message if there is an error */}
-                    {error && <p className="error">{error}</p>}
+                {/* Display error message if there is an error */}
+                {error && <p className="error">{error}</p>}
             </form>
         </section>
     );
