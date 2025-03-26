@@ -1,4 +1,6 @@
+import { useContext, useEffect } from "react";
 import request from "../utils/requester";
+import { UserContext } from "../contexts/UserContext";
 
 const usersUrl = 'http://localhost:3030/users';
 
@@ -14,10 +16,26 @@ export const useLogin = () => {
 
 export const useRegister = () => {
     const register = async (email, password) => {
-        const result = await request('POST', `${usersUrl}/register`, {email, password});
+        const result = await request('POST', `${usersUrl}/register`, { email, password });
 
         return result;
     }
 
     return { register };
+}
+
+export const useLogout = () => {
+    const { accessToken, setAuthData } = useContext(UserContext)
+
+    useEffect(() => {
+        if (!accessToken) {
+            return;
+        }
+
+        request('GET', `${usersUrl}/logout`, null, accessToken)
+            .then(setAuthData(null));
+
+    }, [accessToken, setAuthData])
+
+    return { isLoggedOut: !!accessToken };
 }

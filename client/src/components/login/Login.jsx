@@ -21,6 +21,8 @@ export default function Login() {
         try {
             const authData = await login(email, password);
 
+            delete authData.password;
+
             setAuthData(authData);
 
             navigate('/games');

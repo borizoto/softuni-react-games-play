@@ -12,9 +12,10 @@ import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 import ScrollToTop from "./components/ScrollToTop"
+import Logout from "./components/logout/Logout"
 
 function App() {
-	const [authData, setAuthData] = useState('');
+	const [authData, setAuthData] = useState(null);
 
 	return (
 		<UserContext.Provider value={{...authData, setAuthData}}>
@@ -34,6 +35,9 @@ function App() {
 
 						{/* Register Page ( Only for Guest users ) */}
 						<Route path="/register" element={<Register />} />
+
+						{/* Logout ( Only for logged-in users ) */}
+						<Route path="/logout" element={<Logout />} />
 
 						{/* Create Page ( Only for logged-in users ) */}
 						<Route path="/games/create" element={<GamesCreate />} />
