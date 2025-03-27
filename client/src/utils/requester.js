@@ -14,7 +14,7 @@ export default async function request(method = 'GET', url, data = null, accessTo
     }
 
     const response = await fetch(url, options);
-    console.log(response)
+    
     if (response.status === 204) {
         return; 
     }
