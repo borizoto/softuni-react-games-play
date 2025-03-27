@@ -1,11 +1,14 @@
 import { useParams } from "react-router";
-import { create } from "../../services/commentService";
+import { useComments, useCreateComment } from "../../api/commentsApi";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function CommentsCreate({
-    email,
     setComments
 }) {
-    const {gameId} = useParams();
+    const { gameId } = useParams();
+    const { email } = useContext(UserContext);
+    const { create } = useCreateComment();
 
     const createCommentAction = async (formData) => {
         const { comment } = Object.fromEntries(formData);

@@ -11,8 +11,9 @@ import Header from "./components/header/Header"
 import Home from "./components/home/Home"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
-import ScrollToTop from "./components/ScrollToTop"
+
 import Logout from "./components/logout/Logout"
+import ScrollToTop from "./components/ui/ScrollToTop"
 
 function App() {
 	const [authData, setAuthData] = useState(null);
