@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router"
-import { useState } from "react"
 
 import { UserContext } from "./contexts/UserContext"
+import { usePersistedState } from "./hooks/usePersistedState"
 
 import GamesCatalog from "./components/games-catalog/GamesCatalog"
 import GamesCreate from "./components/games-create/GamesCreate"
@@ -16,7 +16,7 @@ import Logout from "./components/logout/Logout"
 import ScrollToTop from "./components/ui/ScrollToTop"
 
 function App() {
-	const [authData, setAuthData] = useState(null);
+	const [authData, setAuthData] = usePersistedState('auth', null);
 
 	const userLoginHandler = (resultData) => {
 		setAuthData(resultData);
@@ -24,6 +24,7 @@ function App() {
 
 	const userLogoutHandler = () => {
 		setAuthData(null);
+		sessionStorage.removeItem('auth');
 	}
 
 	return (
