@@ -25,7 +25,7 @@ export default function Login() {
 
             userLoginHandler(authData);
 
-            navigate('/games');
+            navigate(-1);
         } catch (err) {
             console.error("Error logging in:", err.message);
             setError(err.message || "Failed to log in profile. Please try again.");
