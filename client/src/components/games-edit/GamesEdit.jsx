@@ -1,20 +1,27 @@
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { useEditGame, useGame } from "../../api/gamesApi";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function GamesEdit() {
     const { gameId } = useParams();
     const { editGame } = useEditGame();
-
+    const { _id } = useContext(UserContext);
     const navigate = useNavigate();
     const { game } = useGame(gameId)
 
     const editGameAction = async (formData) => {
         const gameData = Object.fromEntries(formData);
-        // gameData._id = gameId;
 
         await editGame(gameId, { ...gameData, _id: gameId });
 
         navigate(`/games/${gameId}/details`);
+    }
+
+    const isOwner = _id === game._ownerId;
+
+    if (!isOwner) {
+        return <Navigate to='/games' />
     }
 
     return (
