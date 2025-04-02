@@ -12,6 +12,7 @@ import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 import ScrollToTop from "./components/ui/ScrollToTop"
 import UserProvider from "./providers/UserProvider"
+import AuthGuard from "./guards/AuthGuard"
 
 function App() {
 	return (
@@ -33,14 +34,16 @@ function App() {
 						{/* Register Page ( Only for Guest users ) */}
 						<Route path="/register" element={<Register />} />
 
-						{/* Logout ( Only for logged-in users ) */}
-						<Route path="/logout" element={<Logout />} />
+						<Route element={<AuthGuard />}>
+							{/* Create Page ( Only for logged-in users ) */}
+							<Route path="/games/create" element={<GamesCreate />} />
 
-						{/* Create Page ( Only for logged-in users ) */}
-						<Route path="/games/create" element={<GamesCreate />} />
+							{/* Edit Page ( Only for the creator )*/}
+							<Route path="/games/:gameId/edit" element={<GamesEdit />} />
 
-						{/* Edit Page ( Only for the creator )*/}
-						<Route path="/games/:gameId/edit" element={<GamesEdit />} />
+							{/* Logout ( Only for logged-in users ) */}
+							<Route path="/logout" element={<Logout />} />
+						</Route>
 
 						{/*Details Page*/}
 						<Route path="/games/:gameId/details" element={<GamesDetails />} />
