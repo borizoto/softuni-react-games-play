@@ -13,6 +13,7 @@ import Logout from "./components/logout/Logout"
 import ScrollToTop from "./components/ui/ScrollToTop"
 import UserProvider from "./providers/UserProvider"
 import AuthGuard from "./guards/AuthGuard"
+import NoAuthGuard from "./guards/NoAuthGuard"
 
 function App() {
 	return (
@@ -28,11 +29,13 @@ function App() {
 						{/* Home Page */}
 						<Route path="/" element={<Home />} />
 
-						{/* Login Page ( Only for Guest users ) */}
-						<Route path="/login" element={<Login />} />
+						<Route element={<NoAuthGuard />} >
+							{/* Login Page ( Only for Guest users ) */}
+							<Route path="/login" element={<Login />} />
 
-						{/* Register Page ( Only for Guest users ) */}
-						<Route path="/register" element={<Register />} />
+							{/* Register Page ( Only for Guest users ) */}
+							<Route path="/register" element={<Register />} />
+						</Route>
 
 						<Route element={<AuthGuard />}>
 							{/* Create Page ( Only for logged-in users ) */}
