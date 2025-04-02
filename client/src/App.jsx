@@ -1,8 +1,5 @@
 import { Routes, Route } from "react-router"
 
-import { UserContext } from "./contexts/UserContext"
-import { usePersistedState } from "./hooks/usePersistedState"
-
 import GamesCatalog from "./components/games-catalog/GamesCatalog"
 import GamesCreate from "./components/games-create/GamesCreate"
 import GamesDetails from "./components/games-details/GamesDetails"
@@ -14,21 +11,11 @@ import Register from "./components/register/Register"
 
 import Logout from "./components/logout/Logout"
 import ScrollToTop from "./components/ui/ScrollToTop"
+import UserProvider from "./providers/UserProvider"
 
 function App() {
-	const [authData, setAuthData] = usePersistedState('auth', null);
-
-	const userLoginHandler = (resultData) => {
-		setAuthData(resultData);
-	}
-
-	const userLogoutHandler = () => {
-		setAuthData(null);
-		sessionStorage.removeItem('auth');
-	}
-
 	return (
-		<UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler}}>
+		<UserProvider>
 			<div id="box">
 				{/* Header */}
 				<Header />
@@ -63,7 +50,7 @@ function App() {
 					</Routes>
 				</main>
 			</div>
-		</UserContext.Provider>
+		</UserProvider>
 	)
 }
 
